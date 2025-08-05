@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project1/kalkulator_page.dart';
+import 'package:project1/page/kalkulator_page.dart'; // Pastikan sesuai struktur folder
 import 'package:project1/register_page.dart';
 import 'package:project1/widgets/widget_button.dart';
 import 'package:project1/widgets/widget_textfield.dart';
@@ -24,7 +24,7 @@ class _LoginPageState extends State<LoginPage> {
     if (username == 'admin' && password == '12345') {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (_) => const KalkulatorPage()),
+        MaterialPageRoute(builder: (_) => KalkulatorPage()),
       );
     } else {
       setState(() {
