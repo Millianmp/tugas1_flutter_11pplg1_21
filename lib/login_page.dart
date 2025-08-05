@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:project1/kalkulator_page.dart';
 import 'package:project1/register_page.dart';
+import 'package:project1/widgets/widget_button.dart';
+import 'package:project1/widgets/widget_textfield.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -16,13 +18,13 @@ class _LoginPageState extends State<LoginPage> {
   String errorMessage = '';
 
   void _login() {
-    String username = _usernameController.text;
-    String password = _passwordController.text;
+    final username = _usernameController.text;
+    final password = _passwordController.text;
 
     if (username == 'admin' && password == '12345') {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (_) => KalkulatorPage()),
+        MaterialPageRoute(builder: (_) => const KalkulatorPage()),
       );
     } else {
       setState(() {
@@ -34,7 +36,6 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.red[50],
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
@@ -47,41 +48,40 @@ class _LoginPageState extends State<LoginPage> {
                   height: 120,
                 ),
                 const SizedBox(height: 30),
-                TextField(
+
+                // Username
+                CustomTextField(
                   controller: _usernameController,
-                  decoration: const InputDecoration(
-                    labelText: 'Username',
-                    border: OutlineInputBorder(),
-                    prefixIcon: Icon(Icons.person),
-                  ),
+                  label: 'Username',
+                  icon: Icons.person,
                 ),
                 const SizedBox(height: 20),
-                TextField(
+
+                // Password
+                CustomTextField(
                   controller: _passwordController,
-                  obscureText: true,
-                  decoration: const InputDecoration(
-                    labelText: 'Password',
-                    border: OutlineInputBorder(),
-                    prefixIcon: Icon(Icons.lock),
-                  ),
+                  label: 'Password',
+                  icon: Icons.lock,
+                  isPassword: true,
                 ),
                 const SizedBox(height: 10),
+
+                // Error message
                 if (errorMessage.isNotEmpty)
                   Text(
                     errorMessage,
                     style: const TextStyle(color: Colors.red),
                   ),
                 const SizedBox(height: 10),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.red,
-                    foregroundColor: Colors.white,
-                    minimumSize: const Size.fromHeight(50),
-                  ),
+
+                // Login button
+                CustomButton(
+                  text: 'Login',
                   onPressed: _login,
-                  child: const Text('Login'),
                 ),
                 const SizedBox(height: 10),
+
+                // Register link
                 TextButton(
                   onPressed: () {
                     Navigator.push(
